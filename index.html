@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question for rukayya</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+        body { font-family: 'Quicksand', sans-serif; background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .page { background: white; padding: 2.5rem; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); text-align: center; max-width: 400px; width: 85%; position: absolute; transition: opacity 0.5s, transform 0.5s; }
+        .hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
+        .buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; align-items: center; }
+        button { padding: 12px 25px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; background: #6c5ce7; color: white; font-size: 1rem; }
+        #noBtn { background: #fab1a0; }
+    </style>
+</head>
+<body>
+
+<div class="page" id="page1">
+    <h1>Hey rukayya</h1>
+    <p>I've been thinking about our conversations lately...</p>
+    <button onclick="nextPage(2)">Continue</button>
+</div>
+
+<div class="page hidden" id="page2">
+    <h1>It's really nice...</h1>
+    <p>Talking to you always makes my day better.</p>
+    <button onclick="nextPage(3)">Tell me more</button>
+</div>
+
+<div class="page hidden" id="page3">
+    <h1>So I had a question...</h1>
+    <p>Would you like to be my friend?</p>
+    <div class="buttons">
+        <button id="yesBtn" onclick="nextPage(4)">Yes, I'd love to!</button>
+        <button id="noBtn" onclick="noClicked()">No</button>
+    </div>
+</div>
+
+<div class="page hidden" id="page4">
+    <h1>Really? Yay! 🥳</h1>
+    <p>You're honestly one of the coolest people I know. I'm so glad you said yes.</p>
+    <button onclick="nextPage(5)">Wait, one more thing!</button>
+</div>
+
+<div class="page hidden" id="page5">
+    <h1>Our friendship...</h1>
+    <p>Means a lot to me. I'm looking forward to all the things we'll talk about!</p>
+    <button onclick="nextPage(6)">Keep going</button>
+</div>
+
+<div class="page hidden" id="page6">
+    <h1>One final promise...</h1>
+    <p>I promise to always be there when you need a listener or just someone to chat with!</p>
+    <button onclick="nextPage(7)">Final Page!</button>
+</div>
+
+<div class="page hidden" id="page7">
+    <h1>You're the best! ✨</h1>
+    <p>Let's make some great memories together!</p>
+    <div style="font-size: 3rem;">💖😊🎉</div>
+</div>
+
+<script>
+    let clickCount = 0;
+    function nextPage(n) {
+        document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+        document.getElementById('page' + n).classList.remove('hidden');
+        if(n === 7) confetti({ particleCount: 400, spread: 200, origin: { y: 0.6 } });
+    }
+
+    function noClicked() {
+        clickCount++;
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        yesBtn.style.transform = `scale(${1 + clickCount * 0.2})`;
+        const messages = ["Are you sure?", "Really sure?", "Think again!", "Still no?", "Don't break my heart!"];
+        noBtn.innerText = messages[Math.min(clickCount - 1, messages.length - 1)];
+    }
+</script>
+</body>
+</html>
